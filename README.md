@@ -1,6 +1,6 @@
 # Introduction to AI
 
-Project 1 - Automatic License Plate Recognition
+# Project 1 - Automatic License Plate Recognition
 
 #### RESULTS
 <table><tr>
