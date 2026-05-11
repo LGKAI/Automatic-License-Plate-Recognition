@@ -1,4 +1,4 @@
-# Introduction to AI
+Introduction to AI
 
 # Project 1 - Automatic License Plate Recognition
 
