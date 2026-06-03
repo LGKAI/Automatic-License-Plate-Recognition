@@ -1,6 +1,6 @@
-Introduction to AI
+# Automatic License Plate Recognition
 
-# Project 1 - Automatic License Plate Recognition
+Đồ án Giới thiệu ngành AI
 
 #### RESULTS
 <table><tr>
