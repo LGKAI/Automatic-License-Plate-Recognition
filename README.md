@@ -4,6 +4,22 @@
 
 Sau khi cấu trúc lại, dự án bao gồm một tệp huấn luyện (train) và một giao diện Web đơn giản được xây dựng bằng Flask để tải ảnh lên và nhận diện trực tiếp.
 
+## Cấu trúc thư mục
+
+```text
+source/
+├── data/
+│   ├── images/         # Thư mục chứa ảnh dùng để train mô hình
+│   └── labels.csv      # File csv chứa thông tin bounding box (toạ độ biển số)
+├── static/             # Thư mục chứa file tĩnh của Web App (upload, predict)
+├── templates/          # Thư mục giao diện HTML của Web App
+├── app.py              # File chạy ứng dụng Web (Flask)
+├── deeplearning.py     # Chứa các hàm nhận diện mô hình và đọc chữ (OCR)
+├── main.py             # File train mô hình
+├── requirements.txt    # Danh sách các thư viện Python cần cài đặt
+└── README.md           # Hướng dẫn chạy dự án
+```
+
 ## Yêu cầu cài đặt
 
 1. Đảm bảo bạn đã cài đặt Python 3 (tốt nhất là 3.8 - 3.10).
