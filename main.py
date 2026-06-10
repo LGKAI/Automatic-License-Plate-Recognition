@@ -23,7 +23,7 @@ from tensorflow.keras.preprocessing.image import load_img, img_to_array
 # 1. PREPROCESSING
 # Parsing information from xml and create pandas dataframe
 file_path = os.path.dirname(__file__)
-path = glob(os.path.join(file_path,'Automatic-License-Plate-Recognition/images/*.xml'))
+path = glob(os.path.join(file_path, 'data/images/*.xml'))
 labels_dict = dict(filepath=[],xmin=[],xmax=[],ymin=[],ymax=[])
 for i in path:
 
@@ -48,7 +48,7 @@ df.head()
 
 def getFilename(filename):
     filename_image = xet.parse(filename).getroot().find('filename').text
-    filepath_image = os.path.join('./Automatic-License-Plate-Recognition/images',filename_image)
+    filepath_image = os.path.join('./data/images', filename_image)
     return filepath_image
 
 image_path = list(df['filepath'].apply(getFilename))
@@ -84,6 +84,7 @@ x_train,x_test,y_train,y_test = train_test_split(X,y,train_size=0.8,random_state
 
 # Setup inception-resnetV2
 inception_resnet = InceptionResNetV2(weights="imagenet",include_top=False, input_tensor=Input(shape=(224,224,3)))
+inception_resnet.trainable = False
 
 headmodel = inception_resnet.output
 headmodel = Flatten()(headmodel)
@@ -96,5 +97,8 @@ model = Model(inputs=inception_resnet.input,outputs=headmodel)
 model.compile(loss='mse',optimizer=tf.keras.optimizers.Adam(learning_rate=1e-4)) # Configure the deep learning architecture.
 model.summary() # Print out the overview of the architecture
 
-tfb = TensorBoard('object_detection')
-history = model.fit(x=x_train,y=y_train,batch_size=10,epochs=100,validation_data=(x_test,y_test),callbacks=[tfb])
+history = model.fit(x=x_train,y=y_train,batch_size=10,epochs=20,validation_data=(x_test,y_test))
+
+# Save the trained model
+model.save('object_detection.keras')
+print("Model saved to object_detection.keras successfully.")

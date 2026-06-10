@@ -1,0 +1,10 @@
+Flask
+opencv-python
+numpy
+pandas
+tensorflow
+pytesseract
+plotly
+matplotlib
+scikit-image
+scikit-learn

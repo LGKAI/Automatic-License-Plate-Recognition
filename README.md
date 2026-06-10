@@ -1,27 +1,45 @@
 # Automatic License Plate Recognition
 
-Đồ án Giới thiệu ngành AI
+Đồ án này là một hệ thống Nhận diện Biển Số Xe Tự Động (ALPR) sử dụng YOLO/InceptionResNetV2 để phát hiện biển số và Tesseract OCR để trích xuất văn bản từ biển số. 
 
-#### RESULTS
-<table><tr>
-<td> <img src= "https://github.com/Asikpalysik/Automatic-License-Plate-Detection/blob/main/Presentation/Test.gif?raw=true" width="100%" align="center"  hspace="5%" vspace="5%"/> </td>
-<td> <img src= "https://user-images.githubusercontent.com/91852182/172154404-ccb2a6b5-deb4-4321-91ff-a8f13457b352.gif" width="100%" align="center"  hspace="5%" vspace="5%"/> </td>
-</tr></table>
+Sau khi cấu trúc lại, dự án bao gồm một tệp huấn luyện (train) và một giao diện Web đơn giản được xây dựng bằng Flask để tải ảnh lên và nhận diện trực tiếp.
 
-#### DETECT LICENSE PLATES WITH THE YOLO ALGORITHM
+## Yêu cầu cài đặt
 
-In Today’s Day and Age Security has become one of the biggest concerns for any organization, and automation of such security is essential. However, many of the current solutions are still not robust in real-world situations, commonly depending on many constraints. In the following project, we will understand how to recognize License number plates using the Python programming language. We will utilize OpenCV for this project in order to identify the license number plates and the python pytesseract for the characters and digits extraction from the plate. As well this project will presents a robust and efficient ALPR system based on the state-of-the-art YOLO object detector. We will Web App with a Python program that automatically recognizes the License Number Plate by the end of this journi. The results have shown that the trained neural network is able to perform with high accuracy of nearly 90-95 percent in recognizing license plates in low resolution images using this system.
+1. Đảm bảo bạn đã cài đặt Python 3 (tốt nhất là 3.8 - 3.10).
+2. Cài đặt thêm ứng dụng Tesseract OCR trên hệ điều hành của bạn:
+   - **Windows:** Tải bộ cài từ [UB-Mannheim](https://github.com/UB-Mannheim/tesseract/wiki) và thêm thư mục cài đặt vào biến môi trường `PATH`.
+   - **macOS:** `brew install tesseract`
+   - **Linux:** `sudo apt install tesseract-ocr`
+3. Cài đặt các thư viện Python cần thiết:
 
-#### ABOUT DATASET
+```bash
+pip install -r requirements.txt
+```
 
-This project dataset contains 453 files - images in JPEG format with bounding box annotations of the car license plates within the image. Annotations are provided in the PASCAL VOC format. Pascal VOC(Visual Object Classes) is a format to store annotations for localizer or Object Detection datasets and is used by different annotation editors and tools to annotate, modify and train Machine Learning models. In PASCAL VOC format, for each image there is a xml annotation file containing image details, bounding box details, classes, rotation and other data.
+## Hướng dẫn chạy sản phẩm
 
-#### TABLE OF CONTENT
+### Bước 1: Huấn luyện mô hình (Training)
 
-- LABELING, UNDERSTAND & COLLECT REQUIRED DATA
-- DATA PROCESSING
-- DEEP LEARNING FOR OBJECT DETECTION
-- PIPELINE OBJECT DETECTION MODEL
-- OPTICAL CHARACTER RECOGNITION - OCR
-- NUMBER PLATE WEB APP
-- RAEAL TIME NUMBER PLATE RECOGNITIONT WITH YOLO
+Mô hình học máy `object_detection.keras` chưa có sẵn nên bạn cần phải huấn luyện lại nghiệm từ tập dữ liệu có trong thư mục `data/images/`.
+
+Chạy lệnh sau tại thư mục gốc của project:
+
+```bash
+python main.py
+```
+
+Quá trình này sẽ sử dụng dữ liệu để train và sau khi hoàn thành, nó sẽ tự động lưu ra file `object_detection.keras`. Quá trình này có thể mất một thời gian tùy thuộc vào cấu hình máy tính của bạn.
+
+### Bước 2: Chạy Web App (Chạy giao diện)
+
+Sau khi đã có file `object_detection.keras` từ bước 1, bạn có thể khởi động giao diện Web để dùng thử sản phẩm:
+
+```bash
+python app.py
+```
+
+Ứng dụng sẽ chạy tại địa chỉ: `http://127.0.0.1:5000/`. Mở trình duyệt, tải lên hình ảnh một chiếc xe ô tô và hệ thống sẽ hiển thị kết quả biển số xe.
+
+---
+**Lưu ý:** Quá trình huấn luyện đòi hỏi máy tính có cấu hình ổn (tốt nhất có GPU). Nếu chỉ muốn kiểm tra code chạy được hay không, bạn có thể thay đổi tham số `epochs=100` trong file `main.py` xuống một số nhỏ hơn (ví dụ: `epochs=5`) để tiết kiệm thời gian chờ đợi.
