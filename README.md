@@ -1,5 +1,7 @@
 # Automatic License Plate Recognition
 
+Đồ án Giới thiệu ngành AI
+
 Đồ án này là một hệ thống Nhận diện Biển Số Xe Tự Động (ALPR) sử dụng YOLO/InceptionResNetV2 để phát hiện biển số và Tesseract OCR để trích xuất văn bản từ biển số. 
 
 Sau khi cấu trúc lại, dự án bao gồm một tệp huấn luyện (train) và một giao diện Web đơn giản được xây dựng bằng Flask để tải ảnh lên và nhận diện trực tiếp.
